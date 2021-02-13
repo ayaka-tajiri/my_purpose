@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package my_purpose;
+option go_package = "github.com/ayaka-tajiri/my_purpose/backend/api/my_purpose";
+
+service MyPurpose {
+  rpc IndexPurposes (PurposeRequest) returns (stream PurposeResponse) {}
+  rpc ShowPurpose (PurposeRequest) returns (PurposeResponse) {}
+  rpc CreatePurpose (PurposeRequest) returns (PurposeResponse) {}
+  rpc EditPurpose (PurposeRequest) returns (PurposeResponse) {}
+  rpc DeletePurpose (PurposeRequest) returns (PurposeResponse) {}
+
+  rpc IndexActions (ActionRequest) returns (stream ActionResponse) {}
+  rpc EditAction (ActionRequest) returns (ActionResponse) {}
+  rpc CreateAction (ActionRequest) returns (ActionResponse) {}
+  rpc DeleteAction (ActionRequest) returns (ActionResponse) {}
+
+  rpc IndexCalendars (CalendarRequest) returns (stream CalendarResponse) {}
+}
+
+message PurposeRequest {
+  string id = 1;
+  string user_id = 2;
+  string description = 3;
+}
+
+message PurposeResponse {
+  string id = 1;
+  string user_id = 2;
+  string description = 3;
+}
+
+message ActionRequest {
+  string id = 1;
+  string purposeId = 2;
+  string description = 3;
+  string period = 4;
+  string date = 5;
+  int32 orderNumber = 6;
+}
+
+message ActionResponse {
+  string id = 1;
+  string purposeId = 2;
+  string description = 3;
+  string period = 4;
+  string date = 5;
+  int32 orderNumber = 6;
+}
+
+message CalendarRequest {
+  string month = 1;
+  string user_id = 2;
+}
+
+message CalendarResponse {
+  string title = 1;
+  string start = 2;
+}

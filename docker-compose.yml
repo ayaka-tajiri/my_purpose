@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_pass
+      POSTGRES_DB: purpose
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database/postgres/db:/data/db
+#
+#  app:
+#    build: ./backend
+#    ports:
+#      - "9090:9090"
+#      - "2345:2345"
+#    volumes:
+#    - ./backend:/go/src/my_purpose/backend
+#    tty: true
+#    links:
+#      - postgres
+
+  proxy:
+    build: ./proxy
+    ports:
+      - "8080:8080"
