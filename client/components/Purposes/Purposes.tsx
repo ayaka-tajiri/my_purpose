@@ -3,14 +3,19 @@ import Link from "next/link";
 import {Table, TableBody, TableCell, TableContainer, TableRow} from "@react-md/table";
 import styles from "./Purposes.module.scss";
 import {Text} from "react-md";
-import {MyPurposeClient} from "../../generated/mypurpose_pb_service";
 import {PurposeRequest} from "../../generated/mypurpose_pb";
 import PurposesAddDialog from "./PurposesAddDialog";
 import PurposeDeleteDialog from "./PurposeDeleteDialog";
 import {useFetchUser} from "../../lib/User";
+import {MyPurposeClient} from "../../generated/mypurpose_pb_service";
+// import {EchoClient} from "../../generated/echo_pb_service";
+// import {EchoRequest} from "../../generated/echo_pb";
 
 const myPurposeClient = new MyPurposeClient('http://localhost:8080', {});
 const request = new PurposeRequest();
+
+// const echoClient = new EchoClient('https://api.my-purpose.work', {})
+// const echoRequest = new EchoRequest();
 
 interface Purpose {
     id: string
@@ -82,7 +87,8 @@ export default function Purposes(): ReactElement {
                                         <TableCell grow={true}>{purpose.description}</TableCell>
                                     </Link>
                                     <TableCell grow={false}>
-                                        <PurposeDeleteDialog purposeId={purpose.id} setDeletePurposeId={setDeletePurposeId}/>
+                                        <PurposeDeleteDialog purposeId={purpose.id}
+                                                             setDeletePurposeId={setDeletePurposeId}/>
                                     </TableCell>
                                 </TableRow>
                             )

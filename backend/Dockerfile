@@ -5,7 +5,6 @@ ENV GO111MODULE=on
 WORKDIR /go/src/github.com/ayaka-tajiri/my_purpose/backend
 
 COPY . .
-RUN pwd
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o my_purpose server/grpc_server.go
 
